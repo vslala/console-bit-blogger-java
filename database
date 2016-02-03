@@ -1,0 +1,138 @@
+
+
+CREATE TABLE  "blogs" 
+   (	"id" NUMBER NOT NULL ENABLE, 
+	"author" NUMBER NOT NULL ENABLE, 
+	"title" VARCHAR2(1000) NOT NULL ENABLE, 
+	"summary" VARCHAR2(1000), 
+	"content" VARCHAR2(4000) NOT NULL ENABLE, 
+	"category_id" NUMBER, 
+	"created_at" DATE NOT NULL ENABLE, 
+	"STATUS" NUMBER, 
+	 CONSTRAINT "blogs_PK" PRIMARY KEY ("id") ENABLE
+   )
+/
+
+CREATE OR REPLACE TRIGGER  "blogs_trigger_id" 
+BEFORE
+insert on "blogs"
+for each row
+begin
+select BLOGS_SEQ.nextval into :new."id" from dual;
+end;
+/
+ALTER TRIGGER  "blogs_trigger_id" ENABLE
+/
+
+
+
+
+CREATE TABLE  "users" 
+   (	"id" NUMBER NOT NULL ENABLE, 
+	"first_name" VARCHAR2(100) NOT NULL ENABLE, 
+	"last_name" VARCHAR2(100) NOT NULL ENABLE, 
+	"username" VARCHAR2(50) NOT NULL ENABLE, 
+	"password" VARCHAR2(50) NOT NULL ENABLE, 
+	"created_at" DATE NOT NULL ENABLE, 
+	"STATUS" NUMBER, 
+	 CONSTRAINT "USERS_PK" PRIMARY KEY ("id") ENABLE
+   )
+/
+
+CREATE OR REPLACE TRIGGER  "USERS_TRIGGER_SEQ" 
+BEFORE
+insert on "users"
+for each row
+begin
+SELECT "USER_SEQ".NEXTVAL
+  INTO   :new."id"
+  FROM   dual;
+end;
+/
+ALTER TRIGGER  "USERS_TRIGGER_SEQ" ENABLE
+/
+
+
+
+
+
+
+CREATE TABLE  "categories" 
+   (	"id" NUMBER NOT NULL ENABLE, 
+	"name" VARCHAR2(100) NOT NULL ENABLE, 
+	 CONSTRAINT "CATEGORIES_PK" PRIMARY KEY ("id") ENABLE
+   )
+/
+
+CREATE OR REPLACE TRIGGER  "CATEGORIES_TRIGGER_SEQ" 
+BEFORE
+insert on "categories"
+for each row
+begin
+SELECT CATEGORY_SEQ.NEXTVAL
+INTO :new."id"
+FROM DUAL;
+end;
+/
+ALTER TRIGGER  "CATEGORIES_TRIGGER_SEQ" ENABLE
+/
+
+
+
+
+
+
+
+CREATE TABLE  "comments" 
+   (	"id" NUMBER NOT NULL ENABLE, 
+	"user_id" NUMBER NOT NULL ENABLE, 
+	"blog_id" NUMBER NOT NULL ENABLE, 
+	"comments" VARCHAR2(4000) NOT NULL ENABLE, 
+	"created_at" DATE NOT NULL ENABLE, 
+	 CONSTRAINT "COMMENTS_PK" PRIMARY KEY ("id") ENABLE
+   )
+/
+
+CREATE OR REPLACE TRIGGER  "COMMENTS_TRIGGER_SEQ" 
+BEFORE
+insert on "comments"
+for each row
+begin
+SELECT COMMENTS_SEQ.NEXTVAL
+INTO :new."id"
+FROM DUAL;
+end;
+/
+ALTER TRIGGER  "COMMENTS_TRIGGER_SEQ" ENABLE
+/
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE  "ub_transactions" 
+   (	"id" NUMBER NOT NULL ENABLE, 
+	"user_id" NUMBER NOT NULL ENABLE, 
+	"blog_id" NUMBER NOT NULL ENABLE, 
+	 CONSTRAINT "UB_TRANSACTIONS_PK" PRIMARY KEY ("id") ENABLE
+   )
+/
+
+CREATE OR REPLACE TRIGGER  "UB_TRANSACTIONS_TRIGGER_SEQ" 
+BEFORE
+insert on "ub_transactions"
+for each row
+begin
+SELECT UB_TRANS_SEQ.NEXTVAL
+INTO :new."id"
+FROM DUAL;
+end;
+/
+ALTER TRIGGER  "UB_TRANSACTIONS_TRIGGER_SEQ" ENABLE
+/
