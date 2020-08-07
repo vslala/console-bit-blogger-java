@@ -1,0 +1,8 @@
+title: Bit-blogger
+description: A Console Based Blogging Application built on Java
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-modernist
+
+gems:
+  - jekyll-mentions
